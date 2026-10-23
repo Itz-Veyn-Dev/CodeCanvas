@@ -1,0 +1,39 @@
+{
+  "name": "codecanvas",
+  "version": "1.1.0",
+  "description": "A dark local-first programming notebook with notes, code and drawing.",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "check": "node scripts/check.js",
+    "test": "node --test test/core.test.js test/storage.test.js"
+  },
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "dev.itzveyn.codecanvas",
+    "productName": "CodeCanvas",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "storage.js",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}
