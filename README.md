@@ -1,84 +1,158 @@
-# CodeCanvas
+# 🎨 CodeCanvas
 
-**Your programming notes, drawn your way.**
+### A creative workspace for notes, code, and ideas.
 
-A dark, local-first Windows notebook concept for programming classes. Keep notes, code snippets, and sketches together in one workspace.
+CodeCanvas is an experimental desktop application built with Electron and JavaScript. It aims to bring note-taking, code snippets, and a flexible canvas into one focused workspace.
 
-## Features
-- Dark developer-focused UI
-- Notes, notebooks, search, pinning and tags
-- Free canvas: text, code, drawing, tip/note, divider, image and table elements positioned anywhere, overlapping allowed
-- Every element is resizable (8 handles, live `w × h px` indicator, per-type minimum sizes); move and resize controls and the element toolbar appear only for the selected element
-- Per-note fullscreen focus mode (in-app, not OS fullscreen) – button in the note toolbar, `Esc` to leave
-- Code blocks with language selector, Tab / Shift+Tab indentation, auto-indent, line numbers and copy button
-- Drawing canvas: pen, line, arrow, rectangle, ellipse, eraser, color, size, undo and clear
-- Autosaving local JSON storage
-- Import/export JSON backup
-- Export notes as Markdown
-- Keyboard shortcuts: `Ctrl+N`, `Ctrl+K`, `Ctrl+S`
-- Electron security defaults: `contextIsolation` enabled, `nodeIntegration` disabled
+> **Status:** 🚧 Under active development
 
-## Run
-Requirements: Node.js (the version your Electron 38 install requires) and npm. Windows is the primary target; the app code itself is cross-platform.
+---
+
+## ✨ Vision
+
+Ideas rarely fit into a simple text document.
+
+CodeCanvas explores a different approach: a workspace where developers can organize thoughts, write notes, keep code snippets, and develop ideas in a more flexible environment.
+
+The goal is to make it easier to move from **thinking → organizing → building** without losing context.
+
+## 🚀 Features
+
+- 📝 **Notes:** Create and organize notes in a desktop workspace.
+- 💻 **Code Blocks:** Keep code snippets alongside your ideas.
+- 🧩 **Free Canvas:** Work toward a flexible layout for arranging different content blocks.
+- 🎨 **Visual Organization:** Separate and structure information in a way that suits your workflow.
+- 💾 **Local Data:** Designed around storing workspace data locally.
+- 🖥️ **Desktop Experience:** Built with Electron for desktop use.
+
+*CodeCanvas is a work in progress. Feature availability and reliability may vary between versions.*
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| JavaScript | Application logic |
+| Electron | Desktop application |
+| HTML & CSS | User interface |
+| Node.js | Runtime and tooling |
+| npm | Dependency management |
+
+## 📦 Getting Started
+
+### Prerequisites
+
+Install the following before running the project:
+
+- [Node.js](https://nodejs.org/)
+- npm, included with Node.js
+- Git (optional, for cloning the repository)
+
+### Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/YOUR-USERNAME/CodeCanvas.git
+```
+
+**2. Enter the project directory**
+
+```bash
+cd CodeCanvas
+```
+
+**3. Install dependencies**
+
+```bash
+npm install
+```
+
+**4. Start CodeCanvas**
+
+```bash
+npm start
+```
+
+> If Electron fails to install, check your npm script permissions and the Electron installation instructions before changing dependency versions.
+
+## 📁 Project Structure
+
+```text
+CodeCanvas/
+├── src/
+│   ├── renderer/
+│   │   └── app.js
+│   ├── styles/
+│   │   └── main.css
+│   └── index.html
+├── main.js
+├── preload.js
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
+```
+
+*The structure above reflects the expected layout; adjust it if your current project differs.*
+
+## 🗺️ Roadmap
+
+- [ ] Improve free-canvas interactions
+- [ ] Make resizing and positioning reliable across content blocks
+- [ ] Improve code-block editing
+- [ ] Strengthen local saving and recovery
+- [ ] Refine fullscreen behavior
+- [ ] Improve the overall user experience
+- [ ] Add screenshots and a release build
+
+## 🤝 Contributing
+
+CodeCanvas is an experimental project, and feedback is welcome.
+
+1. Fork the repository.
+2. Create a branch for your change.
+3. Make your changes and test them.
+4. Open a pull request describing what you improved.
+
+For bugs, include reproduction steps and relevant error messages.
+
+## 🔐 Security & Privacy
+
+- Never commit passwords, API keys, tokens, or private data.
+- Keep generated dependencies such as `node_modules` out of version control.
+- Review Electron security settings before distributing production builds.
+
+## 📄 License
+
+No license has been selected yet. Until a license is added, do not assume that others have permission to redistribute or modify the project.
+
+---
+
+## 🇮🇷 توضیحات فارسی
+
+**CodeCanvas** یک اپلیکیشن دسکتاپ آزمایشی است که با Electron و JavaScript ساخته شده و هدفش ترکیب یادداشت‌برداری، نگهداری قطعه‌کدها و سازمان‌دهی ایده‌ها در یک فضای کاری انعطاف‌پذیر است.
+
+### امکانات و اهداف پروژه
+
+- 📝 ساخت و مدیریت یادداشت‌ها
+- 💻 نگهداری کدها در کنار توضیحات
+- 🎨 ایجاد یک فضای کاری آزاد برای مرتب‌کردن محتوا
+- 💾 تمرکز بر ذخیره‌سازی محلی اطلاعات
+- 🖥️ اجرا به‌عنوان برنامهٔ دسکتاپ
+
+این پروژه هنوز در حال توسعه است؛ بنابراین ممکن است بعضی قابلیت‌ها کامل نباشند یا به اصلاح نیاز داشته باشند.
+
+### نصب و اجرا
+
+ابتدا Node.js را نصب کن و سپس در ترمینال پوشهٔ پروژه اجرا کن:
 
 ```bash
 npm install
 npm start
 ```
 
-Build a Windows installer:
+### مشارکت در پروژه
 
-```bash
-npm run dist
-```
+اگر ایده‌ای برای بهبود CodeCanvas داری یا باگی پیدا کردی، می‌توانی با ثبت Issue یا ارسال Pull Request در توسعهٔ آن مشارکت کنی.
 
-The installer is generated in `release/`.
-
-## Privacy
-Notes are stored locally in Electron's application data directory. There is no account or server. Local notes are not encrypted; do not store passwords or API keys in them.
-
-## Fonts
-The UI prefers bundled Vazirmatn WOFF2 files in `assets/`, then falls back to system fonts. Code uses JetBrains Mono/Cascadia Code/Consolas fallbacks. Bundle licensed font files for offline font availability.
-
-## Status
-Early functional prototype. PDF export and a richer document editor can be added in future versions. Test backups before storing important notes.
-
-
-### Recent fixes
-- Replaced the browser prompt with a dedicated Create Note dialog and language dropdown.
-- Added draggable sidebar and note-list splitters; widths are remembered locally.
-
-
-## Pro features in this build
-- Open-note tabs with close/switch controls; tab list is saved in local notebook data.
-- Text, code, drawing, image-URL, divider and editable table blocks.
-- Code editor line numbers, Tab indentation, Enter auto-indent, and synchronized scrolling.
-- Per-text-block color control in the insert toolbar.
-- Full JSON backup includes notes, notebooks, drawing data, and open tabs; Markdown export supports images and tables.
-
-
-## Using the canvas (v3)
-| Action | How |
-|---|---|
-| Select an element | Click it. Only one element is selected at a time. |
-| Deselect | Click empty canvas, or press `Esc` (when not typing). |
-| Move | Drag the grip (`⠿ TYPE`) on the floating bar above the selected element. Text areas, code editors and tables are never draggable themselves, so selecting/typing is unaffected. |
-| Resize | Drag any corner or edge handle. Images keep their aspect ratio on corners (hold `Shift` for free resize). |
-| Edit a drawing | Select it, then click it again (or use **Edit drawing** on its bar). |
-| Layer order | `↑` / `↓` on the bar bring forward / send backward. |
-| Fullscreen note | **⤢ Fullscreen** in the note toolbar; `Esc` or the same button exits. |
-
-Code editor keys: `Tab` / `Shift+Tab` indent / outdent (single line or selection), `Enter` keeps indentation, `Ctrl+Z` undo works across all of these.
-
-## Development
-```bash
-npm run check   # node --check on every JS file + Node unit tests (migration, resize math, storage)
-npm test        # unit tests only
-python3 test/e2e/run.py   # browser-level tests of the UI (needs: pip install playwright && playwright install chromium)
-```
-The browser tests drive the real renderer in Chromium with a mocked `window.codeCanvas`; they do not start Electron. See `TESTING.md` for exactly what was and was not verified. Data-format changes are described in `MIGRATION.md`, and all changes in `CHANGELOG.md`.
-
-## Data safety
-- Saves are atomic (temp file + rename) and the previous good file is kept as `notebook.json.bak`.
-- If `notebook.json` cannot be read, a copy is kept as `notebook.corrupt-<time>.json`, the `.bak` is tried, and if nothing is readable the app starts **read-only** (autosave disabled) instead of overwriting your data.
-- Pending edits are flushed when the window closes (main ↔ renderer handshake, 4 s safety timeout).
+**ساخته‌شده با کنجکاوی، کدنویسی و تلاش برای ساختن یک فضای کاری بهتر.** 🚀
