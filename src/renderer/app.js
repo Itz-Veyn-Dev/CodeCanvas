@@ -282,10 +282,13 @@ function buildBody(n, b, extras, after) {
     sel.innerHTML = programmingLanguages.map(([id, name]) => `<option value="${esc(id)}">${esc(name)}</option>`).join('');
     sel.value = programmingLanguages.some(x => x[0] === b.language) ? b.language : 'text';
     sel.addEventListener('change', () => { b.language = sel.value; changed(n); });
-    const wrap = document.createElement('div'); wrap.className = 'code-editor';
+    const wrap = document.createElement('div'); wrap.className = 'code-editor theme-' + (b.theme || 'one-dark');
     const gutter = document.createElement('pre'); gutter.className = 'line-numbers'; gutter.setAttribute('aria-hidden', 'true');
     const ta = document.createElement('textarea'); ta.className = 'codearea'; ta.spellcheck = false; ta.wrap = 'off'; ta.dir = 'ltr'; ta.placeholder = '// Write code here…';
     ta.setAttribute('autocomplete', 'off'); ta.setAttribute('autocapitalize', 'off'); ta.setAttribute('autocorrect', 'off'); ta.setAttribute('aria-label', 'Code editor');
+    // Keep editor interactions isolated from canvas selection/drag handlers.
+    ta.addEventListener('pointerdown', e => e.stopPropagation());
+    ta.addEventListener('mousedown', e => e.stopPropagation());
     ta.value = b.content || '';
     wrap.append(gutter, ta);
     const foot = document.createElement('div'); foot.className = 'codefoot'; foot.innerHTML = '<span>CODE BLOCK</span><span class="lines">1 line</span>';
@@ -294,7 +297,11 @@ function buildBody(n, b, extras, after) {
     ta.addEventListener('input', () => { b.content = ta.value; changed(n); wordCount(n); lines(); });
     ta.addEventListener('keydown', e => codeKeydown(e, ta));
     body.append(wrap, foot);
-    extras.push(sel, mkBtn('Copy code', 'Copy code to clipboard', async () => { try { await navigator.clipboard.writeText(ta.value); } catch { ta.select(); document.execCommand('copy'); } toast('Code copied'); }, 'bar-btn'));
+    const themeSel = document.createElement('select'); themeSel.className = 'code-theme'; themeSel.title = 'Editor color theme'; themeSel.setAttribute('aria-label','Editor color theme');
+    const themes = [['one-dark','One Dark'],['dark-plus','VS Code Dark+'],['monokai','Monokai'],['github-light','GitHub Light'],['quiet-light','Quiet Light']];
+    themeSel.innerHTML = themes.map(([id,label]) => `<option value="${id}">${label}</option>`).join(''); themeSel.value = themes.some(t=>t[0]===b.theme) ? b.theme : 'one-dark';
+    themeSel.addEventListener('change', () => { b.theme = themeSel.value; wrap.className = 'code-editor theme-' + b.theme; changed(n); });
+    extras.push(sel, themeSel, mkBtn('Copy code', 'Copy code to clipboard', async () => { try { await navigator.clipboard.writeText(ta.value); } catch { ta.select(); document.execCommand('copy'); } toast('Code copied'); }, 'bar-btn'));
     lines();
   } else if (b.type === 'drawing') {
     const cv = document.createElement('canvas'); cv.className = 'drawpreview';
@@ -627,6 +634,11 @@ $('#import').onclick = async () => {
     applyData(migrate(d)); S.active = null; S.view = 'all'; ui.readOnly = false; $('#loadError')?.remove();
     await save(); render(); toast('Backup imported');
   } catch (e) { toast('Import failed: ' + e.message); }
+};
+$('#exportPdf').onclick = async () => {
+  const n = current(); if (!n) return;
+  try { const ok = await window.codeCanvas.exportPdf({ title: n.title || 'Untitled note', notebookName: nbname(n.notebookId), blocks: n.blocks || [] }); if (ok) toast(S.locale === 'fa' ? 'فایل PDF ذخیره شد' : 'PDF exported successfully'); }
+  catch (e) { toast((S.locale === 'fa' ? 'خروجی PDF ناموفق بود: ' : 'PDF export failed: ') + e.message); }
 };
 $('#exportMd').onclick = () => {
   const n = current(); if (!n) return;

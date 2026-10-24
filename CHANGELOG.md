@@ -33,3 +33,8 @@
 - `↑`/`↓` are now layer order (bring forward / send backward).
 - Deleting a non-empty element asks for confirmation.
 - CSP now allows `https:` images (loading a remote image makes a network request).
+
+## 1.2.1 — Dark workspace and drawing PDF export
+- Restored the app-wide low-glare dark theme across the workspace, note list, editor, and dialogs.
+- PDF export now embeds saved drawing strokes as vector SVG artwork instead of a placeholder.
+- Enabled maximum Electron Builder compression for the Windows installer; actual size savings depend on packaged assets and Electron runtime.
